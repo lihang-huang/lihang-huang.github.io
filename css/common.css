@@ -1,0 +1,69 @@
+/*清除浮动*/
+body{
+    min-width: 1300px;
+}
+
+.cf {
+    zoom: 1;
+}
+
+.cf:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #2f5775;
+}
+
+header .wrap {
+    width: 1300px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+header .wrap .title {
+    float: left;
+    height: 100%;
+    line-height: 80px;
+}
+
+header .wrap .title a {
+    font-family: arial;
+    color: #fff;
+}
+
+header .wrap .wrapList {
+    float: left;
+    height: 80px;
+    margin-left: 20px;
+}
+
+header .wrap .wrapList>li {
+    display: inline-block;
+    line-height: 80px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+header .wrap .wrapList>li:hover {
+    background-color: #22303c;
+}
+
+header .wrap .wrapList>li>a {
+    font: 16px arial;
+    color: #fff;
+}
+
+.contentBody {
+    width: 1300px;
+    height: 700px;
+    margin: 0 auto;
+    // background-color: #e4e4e4;
+}

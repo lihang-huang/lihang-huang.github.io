@@ -1,74 +1,78 @@
-header {
-    width: 100%;
-    height: 80px;
-    background-color: #2f5775;
-}
 
-header .wrap {
-    width: 1300px;
-    height: 100%;
-    margin: 0 auto;
-}
 
-header .wrap .title {
-    float: left;
-    height: 100%;
-    line-height: 80px;
-}
-
-header .wrap .title a {
-    font-family: arial;
-    color: #fff;
-}
-
-header .wrap .wrapList {
-    float: left;
-    height: 80px;
-    margin-left: 20px;
-}
-
-header .wrap .wrapList>li {
-    display: inline-block;
-    line-height: 80px;
-    padding: 0 15px;
-    cursor: pointer;
-}
-
-header .wrap .wrapList>li:hover {
-    background-color: #22303c;
-}
-
-header .wrap .wrapList>li>a {
-    font: 16px arial;
-    color: #fff;
-}
-
-.contentBody {
-    width: 1300px;
-    height: 700px;
-    margin: 0 auto;
-    // background-color: #e4e4e4;
-}
 
 .contentBody section {
-	box-sizing: border-box;
+    box-sizing: border-box;
     float: left;
     width: 900px;
     height: 660px;
     margin-top: 50px;
 }
 
-.contentBody section article{
-	width: 700px;
-	height: 110px;
-	margin:30px auto;
-	background-color: #f4f4f4;
+.contentBody section article {
+    width: 700px;
+    height: 110px;
+    margin: 40px auto;
+    cursor: pointer;
 
 }
 
-.contentBody section article .artImg{
-	height: 100%;
-	width: 200px;
+.contentBody section article .artImg {
+    float: left;
+    height: 100%;
+    width: 200px;
+}
+
+.contentBody section article .artTitle {
+	// font:22px arial;
+	// font-weight: bold;
+    float: left;
+    margin-left: 20px;
+    // margin-top: 5px;
+    color: #2f5775;
+}
+
+.contentBody section article .artTitle:hover{
+	text-decoration: underline;
+}
+
+.contentBody section article .des {
+    margin-left: 220px;
+    font: 14px arial;
+    line-height: 30px;
+    height: 40px;
+    width: 450px;
+    text-indent: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contentBody section article .from {
+    float: left;
+    font: 12px arial;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.contentBody section article .tag{
+	float: left;
+	margin-left: 20px;
+	font:12px arial;
+	height: 20px;
+	line-height: 20px;
+	padding:0 10px;
+	border-radius: 5px;
+}
+
+.contentBody section article .black{
+	background-color: #000;
+	color: #fff;
+}
+
+.contentBody section article .blue{
+	background-color: #1a70bf;
+	color: #fff;
 }
 
 .contentBody aside {
@@ -102,7 +106,7 @@ header .wrap .wrapList>li>a {
 
 .contentBody aside p {
     font: 14px arial;
-    margin-top: 8px;
+    margin-top: 10px;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
