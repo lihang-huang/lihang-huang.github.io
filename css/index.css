@@ -53,6 +53,7 @@
     font: 12px arial;
     margin-left: 20px;
     margin-top: 15px;
+    font-style: italic;
 }
 
 .contentBody section article .tag{
@@ -82,7 +83,6 @@
     float: left;
     margin-top: 50px;
     margin-bottom: 20px;
-    // background-color: #f0f0f0;
     border-left: 1px solid #8f959b;
 }
 

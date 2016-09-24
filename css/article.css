@@ -1,0 +1,40 @@
+.contentBody .inner{
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 80px 50px;
+}
+
+.contentBody .artTitle{
+	font:34px arial;
+	margin-bottom: 10px;
+}
+.contentBody .inner h5{
+	margin-top: 40px;
+	margin-bottom: 20px;
+	text
+}
+.contentBody .inner p{
+	font:16px "微软雅黑";
+	line-height: 30px;
+	text-indent: 30px;
+}
+
+.contentBody .inner p.secondTitle{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.contentBody .inner .lastSign{
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.contentBody .inner .picture{
+	margin:30px auto;
+	width:500px;
+	height: 350px;
+	background: url(../img/firstBlog.jpg) no-repeat;
+	background-size: 100% 100%;
+}
