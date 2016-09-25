@@ -83,3 +83,53 @@ footer{
     border-bottom: 1px solid #8f959b;
 
 }
+
+.back-to-top {
+    visibility: hidden;
+    position: fixed;
+    left: 50%;
+    margin-left: 660px;
+    margin-bottom: 70px;
+    bottom: 30px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #e3e3e3;
+    background-color: #fafafa;
+    cursor: pointer;
+}
+
+.back-to-top:hover .to-top {
+    display: block;
+}
+
+.back-to-top:hover .icon {
+    display: none;
+}
+
+.back-to-top .icon:hover {
+    display: none;
+}
+
+.back-to-top .icon:hover .to-top {
+    display: block;
+}
+
+.back-to-top .to-top {
+    display: none;
+    position: absolute;
+    font: 13px arial;
+    color: #999;
+    line-height: 19px;
+    text-align: center;
+}
+
+.back-to-top .icon {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 2px;
+    height: 17px;
+    width: 33px;
+    margin: 0 auto;
+    background: url(../img/topfed.png) no-repeat -1px -10px;
+}
