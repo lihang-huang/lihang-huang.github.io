@@ -40,9 +40,14 @@
 }
 
 .contentBody .inner img{
-	display:inline-block;	
+	display:inline-block;
+
 	width:400px;
 	margin-top: 10px;
-	margin-right: 10px;
+	margin-left: 10px;
 	margin-bottom: 20px;
+}
+
+.code{
+	background-color: #e4e4e4;
 }
