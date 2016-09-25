@@ -38,3 +38,11 @@
 	background: url(../img/firstBlog.jpg) no-repeat;
 	background-size: 100% 100%;
 }
+
+.contentBody .inner img{
+	display:inline-block;	
+	width:400px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
