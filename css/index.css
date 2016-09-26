@@ -4,7 +4,7 @@
 .contentBody section {
     box-sizing: border-box;
     float: left;
-    width: 900px;
+    width: 700px;
     height: 660px;
     margin-top: 50px;
 }
@@ -80,7 +80,7 @@
 
 .contentBody aside {
     box-sizing: border-box;
-    width: 400px;
+    width: 300px;
     height: 660px;
     float: left;
     margin-top: 50px;

@@ -1,6 +1,6 @@
 /*清除浮动*/
 body{
-    min-width: 1300px;
+    min-width: 1000px;
     overflow-y: scroll;
 }
 
@@ -26,7 +26,7 @@ header {
 }
 
 header .wrap {
-    width: 1300px;
+    width: 1000px;
     height: 100%;
     margin: 0 auto;
 }
@@ -65,7 +65,7 @@ header .wrap .wrapList>li>a {
 }
 
 .contentBody {
-    width: 1300px;
+    width: 1000px;
     height: auto;
     margin: 0 auto;
     margin-top:80px;
@@ -75,7 +75,7 @@ header .wrap .wrapList>li>a {
 footer{
     box-sizing: border-box;
     padding: 20px 50px;
-    width: 1300px;
+    width: 1000px;
     height: 100px;
     margin: 20px auto;
     // margin-bottom: 0px;
@@ -88,8 +88,8 @@ footer{
     visibility: hidden;
     position: fixed;
     left: 50%;
-    margin-left: 660px;
-    margin-bottom: 70px;
+    margin-left: 510px;
+    margin-bottom: 10px;
     bottom: 30px;
     width: 38px;
     height: 38px;
