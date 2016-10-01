@@ -41,11 +41,18 @@ $(document).ready(function() {
     $(".back-to-top").click(returnTop);
     $(".mediaTool").click(function() {
         sideAni();
-        $(".mon").css("display",'block');
+        $(".mon").css("display", 'block');
     });
 
-    $(".mon").click(function(){
-        $(".mon").css("display","none");
-        sideBack();
+    $("header .wrap .wrapList").on("touchmove",function(){
+        event.preventDefault();
     });
+
+    $(".mon").click(function() {
+        $(".mon").css("display", "none");
+        sideBack();
+    }).on('touchmove', function(event) {
+        event.preventDefault();
+    });
+
 });

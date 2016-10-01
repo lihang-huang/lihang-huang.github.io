@@ -272,6 +272,7 @@ footer {
         background-color: #333333;
         z-index: 100;
         opacity: 0.97;
+        overflow: scroll;
     }
     header .wrap .wrapList>li {
         display: block;
