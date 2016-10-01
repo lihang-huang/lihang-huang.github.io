@@ -1,6 +1,4 @@
 
-
-
 .contentBody section {
     box-sizing: border-box;
     float: left;
@@ -117,4 +115,11 @@
 .contentBody aside p a {
     color: #000;
     text-decoration: underline;
+}
+
+
+@media screen and (max-width: 780px){
+    .contentBody aside{
+        display: none;
+    }
 }

@@ -3,28 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
     <title>首页-黑白科技日志</title>
     <link rel="stylesheet" href="./css/cube.min.css">
-    <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
     <script src="./js/jquery.1.10.2.min.js"></script>
 </head>
 
 <body>
     <header>
         <div class="wrap">
+            <div class="mon"></div>
             <h1 class="title"><a href="">黑白科技日志</a></h1>
             <ul class="wrapList">
+                <aside>
+                    <!-- 个人介绍 -->
+                    <img src="./img/photo.jpeg" alt="" class="photo">
+                    <h2>关于作者</h2>
+                    <p>黄力航（三哥）</p>
+                    <p><a href="https://github.com/lihang-huang">查看我的 github !</a></p>
+                    <p>lihang_huang@163.com</p>
+                </aside>
                 <li><a href="">前端开发</a></li>
                 <li><a href="">游戏开发</a></li>
                 <li><a href="">nodejs</a></li>
                 <li><a href="">Python</a></li>
                 <li><a href="">黑科技日志</a></li>
             </ul>
+            <!-- 移动适配 -->
+            <span class="mediaTool"></span>
+            <a href="http://huanglihang.cn" class="homeTool"></a>
         </div>
     </header>
     <div class="contentBody cf">
-        <section>
+        <section class="outer">
             <article>
                 <a href="./html/blog/firstSection.html"><img src="./img/firstBlog.jpg" alt="" class="artImg"></a>
                 <h3><a href="./html/blog/firstSection.html" class="artTitle">日志的开山之作</a></h3>
