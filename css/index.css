@@ -3,8 +3,8 @@
     box-sizing: border-box;
     float: left;
     width: 700px;
-    height: 660px;
     margin-top: 50px;
+    border-right: 1px solid #8f959b;
 }
 
 .contentBody section article {
@@ -79,11 +79,11 @@
 .contentBody aside {
     box-sizing: border-box;
     width: 300px;
-    height: 660px;
+    height: 100%;
     float: left;
     margin-top: 50px;
     margin-bottom: 20px;
-    border-left: 1px solid #8f959b;
+    // border-left: 1px solid #8f959b;
 }
 
 .contentBody aside .photo {
