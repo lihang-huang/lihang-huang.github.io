@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>黑白科技日志 | 利用angularJS编写小型搜索工具</title>
+    <link rel="stylesheet" href="../../css/cube.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/article.css">
+    <link rel="stylesheet" href="../../css/search.css">
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <h1 class="title"><a href="../../index.html">黑白科技日志</a></h1>
+            <ul class="wrapList">
+                <li><a href="">前端开发</a></li>
+                <li><a href="">游戏开发</a></li>
+                <li><a href="">nodejs</a></li>
+                <li><a href="">Python</a></li>
+                <li><a href="">黑科技日志</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="contentBody">
+        <div class="inner">
+            <h3 class="artTitle">利用angularJS编写小型搜索工具</h3>
+            <h5><i>作者：三哥</i></h5>
+            <p>最近在学习angularJS的前端框架，相比jQuery它更注重数据与控制器还有视图的分离，也就是MVC的设计模式。都说angularJS可以完美实现CRUD（增删查改），今天我就用angularJS来实现一个小型的搜索工具，类似百度的搜索工具。</p>
+            <p>因为没有搭建服务器，所以我做了静态数据用来模拟数据库，先展示完成的原型，你可以利用这个小工具搜索我的博客上的所有文章并直接跳转过去：</p>
+            <form action="" ng-app="app" ng-controller = "myCtrl" class="outer">
+                <ul>
+                    <input type="text"  ng-model="search" class="searchZone cf" placeholder="请尝试输入js...">
+                    <input type="submit" class="searchButton" value="搜索更多">
+                    <li ng-repeat="item in titleList | filter:{title:search}" ng-show="search" ng-if="$index<4" class="searchResult">
+                        <a href="{{item.href}}" target="_blank">{{item.title}}</a>
+                    </li>
+                </ul>
+            </form>
+            <p>上面的小型搜索工具就是用angularJS做的。我们来解析一下实现的步骤：</p>
+            <p class="secondTitle"><strong>实现步骤：</strong></p>
+            <p>1.功能需求确定，由于没有搭设服务器和数据库，所以我们没有做服务端请求，写了静态数据用来调用，可以分为以下几个功能：</p>
+            <p>a.通过输入框中的内容实时搜索文章题目中包含的字符串并在下方返回</p>
+            <p>b.最多返回前四条搜索数据</p>
+            <p>c.根据搜索内容的更改实时切换下方推荐文章</p>
+            <p>d.点击下方推荐文章跳转</p>
+            <p>2.设计MVC（数据、视图、控制器）</p>
+            <p>angularJS提供了一个简单易上手的MVC设计模式。我们首先通过ng-app来管理我们的视图边界，ng-app也就是我们的视图，所有的数据只能绑定在视图包裹的标签之中。</p>
+            <pre class="code">
+                <code>
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+
+    &lt;head>
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title>Document&lt;/title&gt;
+        &lt;link rel="stylesheet" href="./public/css/cube.min.css"&gt;
+        &lt;link rel="stylesheet" href="./public/css/search.css"&gt;
+    &lt;/head&gt;
+
+    &lt;body ng-app="app" ng-controller="myCtrl"&gt;
+    &lt;form action=""&gt;
+        &lt;ul&gt;
+            &lt;input type="text" value="hah" ng-model="search" class="searchZone cf" placeholder="请输入关键词..."&gt;
+            &lt;input type="submit" class="searchButton" value="搜索更多"&gt;
+            &lt;li ng-repeat="item in titleList | filter:{title:search}" ng-show="search" ng-if = "$index&lt;4" class="searchResult"&gt;
+                &lt;a href="{{item.href}}" target = "_blank">{{item.title}}&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/form&gt;
+    &lt;/body&gt;
+    &lt;script src="./public/js/angular.min.js">&lt;/script&gt;
+    &lt;script src="./public/js/search.js">&lt;/script&gt;
+
+    &lt;/html&gt;
+                </code>
+            </pre>
+            <p>上面的代码是整个搜索工具的源码片段，可以看到我们在body标签上设定了angularJS的视图边界（ng-app="app"）。然后我们需要创建控制器以及用以传递到视图的数据：</p>
+            <pre class="code">
+                <code>
+    var app = angular.module('app',[]);
+    app.controller('myCtrl',function($scope){
+        $scope.titleList = [
+            {title:"日志的开山之作",href:"http://huanglihang.cn/html/blog/firstSection.html"},
+            {title:"利用JavaScript编写计算器工具",href:"http://huanglihang.cn/html/blog/secondSection.html"},
+            {title:"JS面向对象编程（一）",href:"http://huanglihang.cn/html/blog/JSobject1.html"},
+            {title:"JS面向对象编程（二）",href:"http://huanglihang.cn/html/blog/JSobject2.html"},
+            {title:"DOM事件流与event对象学习笔记",href:"http://huanglihang.cn/html/blog/domStream.html"},
+            {title:"利用angularJS编写搜索工具",href:"http://huanglihang.cn/html/blog/angularForSearch.html"}
+        ];
+    });
+                </code>
+            </pre>
+            <p>这里的第一行angular.module是定义个angularJS的app应用用以确定边界。然后我们在这个app应用中添加一个控制器方法(controller)，并给这个控制器取上名字叫"myCtrl"方便我们给标签挂载控制器。通过定义后，我们把myCtrl的控制器挂载到form表单上，这样整个form表单就是myCtrl的作用域了。这里在控制器的回调函数中传入的$scope参数就是一个数据模型对象，通过给$scope对象添加属性和方法就可以在视图中利用控制器把数据模型绑定上去。</p>
+            <p>其实这段里面控制器没干啥事，就是在$scope对象上添加了静态数据，然后我们在控制器的作用域内把titleList的数组绑定在视图中：</p>
+            <pre class="code">
+                <code>
+        &lt;li ng-repeat="item in titleList | filter:{title:search}" ng-show="search" ng-if = "$index&lt;4" class="searchResult"&gt;
+            &lt;a href="{{item.href}}" target = "_blank"&gt;{{item.title}}&lt;/a&gt;
+        &lt;/li&gt;
+                </code>
+            </pre>
+            <p>ng-repeat是angularJS用来循环表达式的方法，filter过滤器是我们实现这个搜索工具的重点，在filter后面允许传递参数表示表达式中有符合参数字符串的子集。</p>
+            <p>然后我们通过{{item.title}}的表达式把文章题目显示在页面上，同时通过href="{{item.href}}"的方法，把数据再绑定到a标签的href属性上完成了搜索显示与链接的功能。</p>
+            <p>最后，为了最多显示四个，不至于当搜索显示条目过多造成不美观的现象。使用$index参数，这里我实验了一下，当你使用fliter在筛选子集的时候，$index是指向通过filter新生成的子集数组，而不是原始的控制器绑定的titleList。于是，通过设置ng-if的指令，如果$index数组小标小于4的时候显示，即前四个数组元素被提取出来。</p>
+            <p>这样就完成了一个搜索工具，之后如果搭建好数据库，把搜索更多连上数据库去搜索，这个搜索工具就完整了。</p>
+            <p class="secondTitle"><strong>心得</strong></p>
+            <p>之前在看angularJS的中文社区，不过好像讲得很晦涩，也比较杂乱。推荐这套教程，比较清晰而且方便练习：<a href="http://www.runoob.com/angularjs/angularjs-tutorial.html">链接地址</a></p>
+            <p class="lastSign">2016年10月5日</p>
+        </div>
+    </div>
+    <div class="back-to-top">
+        <div class="to-top">回到顶部</div>
+        <span class="icon"></span>
+    </div>
+    <footer>
+        <p>黑白科技日志@2016</p>
+        <p>version 1.1</p>
+    </footer>
+    <script src="../../js/jquery.1.10.2.min.js"></script>
+    <script src="../../js/angular.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/search.js"></script>
+</body>
+
+</html>

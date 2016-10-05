@@ -1,3 +1,7 @@
+a:hover{
+	text-decoration: underline;
+}
+
 .contentBody .inner{
 	height: 100%;
 	width: 100%;
@@ -20,6 +24,13 @@
 	text-indent: 30px;
 }
 
+.contentBody .inner pre{
+	background-color: #f0f0f0;
+	border:1px dotted #000;
+	margin-top:20px;
+	margin-bottom: 20px;
+}
+
 .contentBody .inner p.secondTitle{
 	margin-top: 20px;
 	margin-bottom: 10px;
@@ -40,11 +51,10 @@
 }
 
 .contentBody .inner img{
-	display:inline-block;
-
+	display:block;
+	
 	width:400px;
-	margin-top: 10px;
-	margin-left: 10px;
+	margin:10px auto;
 	margin-bottom: 20px;
 }
 
