@@ -96,12 +96,19 @@ header .wrap .homeTool {
 footer {
     box-sizing: border-box;
     padding: 20px 50px;
-    width: 1000px;
+    width: 100%;
     height: 100px;
-    margin: 20px auto;
+    margin-top: 20px;
+    margin-bottom: 5px;
     // margin-bottom: 0px;
     border-top: 1px solid #8f959b;
     border-bottom: 1px solid #8f959b;
+}
+
+footer .f-inner {
+    width: 1000px;
+    height: 100%;
+    margin: 0px auto;
 }
 
 .back-to-top {
@@ -110,7 +117,7 @@ footer {
     left: 50%;
     margin-left: 510px;
     margin-bottom: 10px;
-    bottom: 30px;
+    bottom: 100px;
     width: 38px;
     height: 38px;
     border: 1px solid #e3e3e3;

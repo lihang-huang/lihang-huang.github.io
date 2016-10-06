@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>黑白科技日志 | Mark一道关于this与作用域的JS题目</title>
+    <link rel="stylesheet" href="../../css/cube.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/article.css">
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <h1 class="title"><a href="../../index.html">黑白科技日志</a></h1>
+            <ul class="wrapList">
+                <li><a href="">前端开发</a></li>
+                <li><a href="">游戏开发</a></li>
+                <li><a href="">nodejs</a></li>
+                <li><a href="">Python</a></li>
+                <li><a href="">黑科技日志</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="contentBody">
+        <div class="inner">
+            <h3 class="artTitle">Mark一道关于this与作用域的JS题目</h3>
+            <h5><i>作者：三哥</i></h5>
+            <p>最近在网上看到一道关于this与作用域的JavaScript笔试题，觉得很有意思和朋友讨论一下，最后写了一个答案分享在博客里面。我也会根据我的思路在解这道题目。</p>
+            <p class="secondTitle"><strong>题干：</strong></p>
+            <pre class="code">
+                <code>
+    /*要求：
+    1、只能在指定的位置填写自己的代码，本文件里的其他代码不能修改
+    2、所有题目都不允许添加全局变量名
+    3、本文件应该能在firebug的console里正常执行，并输出结果
+    4、代码最优化，效率最高
+    5、代码注释明确
+
+    练习1：
+    实现一个遍历数组或对象里所有成员的迭代器。*/
+
+    var each = function(obj, fn){
+            //+++++++++++答题区域+++++++++++
+
+
+            //+++++++++++答题结束+++++++++++
+    };
+
+    try{
+            var data1 = [4,5,6,7,8,9,10,11,12];
+            var data2 = {
+                    "a": 4,
+                    "b": 5,
+                    "c": 6
+            };
+            
+            each(data1, function(o){
+                    if( 6 == this )
+                            return true;
+                    else if( 8 == this )
+                            return false;
+                    console.log(o + ": \"" + this + "\"");
+            });
+            
+            /*------[执行结果]------
+
+            1: "4"
+            2: "5"
+            4: "7"
+
+            ------------------*/
+            
+            each(data2, function(v, n){
+                    if( 5 == this )
+                            return true;
+                    console.log(n + ": \"" + v + "\"");
+            });
+            
+            /*------[执行结果]------
+
+            a: "4"
+            c: "6"
+
+            ------------------*/  
+    }catch(e){
+            console.error("执行出错，错误信息: " + e);
+    }
+                </code>
+            </pre>
+            <p class="secondTitle"><strong>解题：</strong></p>
+            <p>首先我们先看题目要求，题目很清晰，要求只能在规定区域添加代码，同时不能添加全局变量。答题的位置题目中已经给我们设定好了，其实就是编写一个each函数。</p>
+            <p>我们先看一下each函数下方的try-catch部分，这里其实是执行each函数的部分，其实从这部分可以看出题目对each函数编写的要求。</p>
+            <p>首先，each函数会传入两个形参obj和fn，第一个obj从下文的执行中会发现有可能是数组也有可能是对象，而fn就是需要传入function对象。</p>
+            <p>其次，我们在观察传入的fn参数的下方执行实力，有一个共同的特点是fn都会返回一个boolean值。</p>
+            <p>第三，我们对比一下在each函数中传入的第一个形参obj和最后输出的结果。比如传入data1的数组时，输出的是一个根据data1的数组成员处理过的结果；传入data2的对象，很明显输出结果也是基于data2的对象成员进行的处理。</p>
+            <p>仔细观察参数fn的两个实例，你会发现最后的结果都是通过fn来输出的。那么其实each函数的作用就可以确定了：</p>
+            <p>1.接收用来处理的数据(obj)</p>
+            <p>2.接收用来处理数据的函数(fn)</p>
+            <p><strong>剩下的疑惑就是两个实例中,用于判断return布尔值的分支到底是干什么用的以及this到底指向谁？</strong></p>
+            <p>关于return的布尔值，这里可能就不能通过结果来倒推了，我们需要比较一下传入的数据data1和data2与输出结果之间有什么区别和关联。其实不难发现，两个实例在输出结果时，其实是对数据进行了遍历，一个一个输出的。那么很自然的我们会想到用遍历的方法来处理数据。</p>
+            <p>然后我们仔细分析一下data1的实例答案。这是一个包含4到12的数组，但它最终输出的结果是4,5,7；从fn的处理函数的过程看，当this等于6的时候返回了true做了一次处理，当this等于8的时候返回false做了一次处理。</p>
+            <p>想象一下，其实答案已经很明显了，4,5,7中间缺少了6也就是说当遍历到6的值时，循环continue跳过了，而当遍历到8时，循环break所以就没有了后面的输出结果。</p>
+            <p>最后，剩下一个问题，就是this代表什么？其实从实例来看，this其实也很明显，是代表obj中的每个遍历的数值。那我们如何将this指向每个数值，同时还是根据遍历动态变态的呢？</p>
+            <p>要解决这个问题，我们需要用到<strong>call</strong>或者<strong>apply</strong>的方法，也是这道题目解决问题的关键知识点。</p>
+            <p>我们都知道通过call和apply的方法可以函数中修改this指针的上下文。如果对这块不是很熟悉的同学，可以看一下这篇文章，写的很好！<a href="http://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/" target="_blank">《深入浅出JavaScript中的this》</a>。但是到底this指向的作用域链最小可以到哪里呢？</p>
+            <p>答案原来是一个<strong>基础类型值</strong></p>
+            <p>也就是说，我们可以把this指向一个基础类型，这样这道题目也就迎刃而解了。</p>
+            <p class="secondTitle"><strong>编写伪代码</strong></p>
+            <pre class="code">
+                <code>
+    /*要求：
+    1、只能在指定的位置填写自己的代码，本文件里的其他代码不能修改
+    2、所有题目都不允许添加全局变量名
+    3、本文件应该能在firebug的console里正常执行，并输出结果
+    4、代码最优化，效率最高
+    5、代码注释明确
+
+    练习1：
+    实现一个遍历数组或对象里所有成员的迭代器。*/
+
+    var each = function(obj, fn){
+            //+++++++++++答题区域+++++++++++
+        1.对obj的成员进行遍历
+            2.首先判断obj是数组还是对象
+                3.1利用call或apply方法把obj中的成员作为作用域绑定到fn函数并执行
+                3.2执行fn的过程中会输出结果
+            4.根据fn返回的结果决定是跳过、结束或者继续循环
+
+            //+++++++++++答题结束+++++++++++
+    };
+                </code>
+            </pre>
+            <p>好吧，这个伪代码是我已经写出结果以后再写的，所以看上去好像写得很精简。实际真的写的时候还是比较混乱的。最好是通过画流程的方法来写伪代码。</p>
+            <p class="secondTitle"><strong>最后的答案：</strong></p>
+            <pre class="code">
+                <code>
+    var each = function(obj, fn){
+            //+++++++++++答题区域+++++++++++
+            for (var o in obj) {
+                if(obj instanceof Array){
+                    //如果obj是一个数组，就fn调用作用域执行
+                      var result = fn.call(obj[o],parseInt(o)+1);
+                }else{
+                    //如果obj是对象的话
+                      var result = fn.call(obj[o],obj[o],o);
+                }
+                if (result == true){
+                    continue;
+                }
+                else if(result == false){
+                    break;
+                }
+            }
+            //+++++++++++答题结束+++++++++++
+    };
+                </code>
+            </pre>
+            <p class="secondTitle"><strong>总结</strong></p>
+            <p>总结一些解题心得，由于是初学者感觉每次碰到JS的代码题会有点心慌，导致审题不清。所以解题的第一要领是先读懂题，然后根据给出的条件和线索一点一点确定。你可以拿答案去控制台里面验证一下。</p>
+            <p>另外，这道题我觉得很考验对于this指针和作用域的理解，题目设计的也特别有趣。所以特地来分享这道题。最后再和大家推荐这篇将this的文章，写的真的特别好。<a href="http://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/" target="_blank">《深入浅出JavaScript中的this》</a></p>
+            <p class="lastSign">2016年10月6日</p>
+        </div>
+    </div>
+    <div class="back-to-top">
+        <div class="to-top">回到顶部</div>
+        <span class="icon"></span>
+    </div>
+    <footer>
+        <div class="f-inner">
+            <p>黑白科技日志@2016</p>
+            <p>version 1.1</p>
+        </div>
+    </footer>
+    <script src="../../js/jquery.1.10.2.min.js"></script>
+    <script src="../../js/common.js"></script>
+</body>
+
+</html>
